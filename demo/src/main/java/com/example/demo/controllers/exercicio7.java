@@ -9,17 +9,17 @@ import com.example.demo.model.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-public class exercicio6 {
+public class exercicio7 {
 
     @Autowired
     UserRepository repo;
 
-    @PostMapping("/create")
+    @PatchMapping("/changepassword")
     public ResponseEntity<String> newUser(@RequestBody Ex6 infUser)  {
 
         String emailPost = infUser.email();
