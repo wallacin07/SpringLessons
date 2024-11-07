@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +21,8 @@ public class Usuario {
 
     @Column
     private String password;
+
+
 
     public Long getId() {
         return id;

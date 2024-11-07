@@ -25,10 +25,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
                 
-        var it = request.getHeaderNames();
-        while (it.hasMoreElements()) {
-            System.out.println(it.nextElement());
-        }
         
         var jwt = getJwt(request);
         if (jwt == null)

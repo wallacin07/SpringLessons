@@ -23,7 +23,6 @@ public class DefaultJWTService implements JWTService<Token> {
         var claims = new HashMap<String, Object>();
         
         claims.put("id", token.getId());
-        claims.put("role", token.getRole());
 
         return get(claims);
     }
@@ -36,7 +35,6 @@ public class DefaultJWTService implements JWTService<Token> {
 
             Token token = new Token();
             token.setId(Long.parseLong(map.get("id").toString()));
-            token.setRole(map.get("role").toString());
 
             return token;
         }
