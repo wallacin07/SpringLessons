@@ -1,41 +1,50 @@
 package com.example.demo.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.Ex10;
-import com.example.demo.dto.Token;
-import com.example.demo.repositories.UserRepository;
+import com.example.demo.dto.JWTValidationDto;
 import com.example.demo.services.JWTService;
+import com.example.demo.dto.Token;
+import com.example.demo.model.NewUser;
+import com.example.demo.repositories.UserRepository;
 
-public class exercicio10 {
+@RestController
+@CrossOrigin(origins={"http://localhost:5257"})
+@RequestMapping("/product")
+public class JWTValidation {
+    
+    @Autowired
+    JWTService<Token> jwtService;
 
     @Autowired
     UserRepository repo;
 
-     @Autowired
-    PasswordEncoder encoder;
+    @PostMapping()
+    public void validateToken(@RequestAttribute("token") Token token,
+    @RequestBody JWTValidationDto product){
 
-    @Autowired
-    JWTService<Token> jwtService;
+        System.out.println(product);
+        System.out.println(token.getId());
+        System.out.println(token.getId().getClass().getName());
+        System.out.println(token.getRole());
 
+        System.out.println();
 
-    @PostMapping("/login")
-    public ResponseEntity<String> createProduct(@RequestBody Ex10 inf) {
+        Optional<NewUser> user = repo.findById(token.getId());
 
-
-        var jwt = jwtService.get(inf.token());
-        var valide = jwtService.validate(jwt);
-        
-
-
-
-
-            return null;
-
+        // if (!user.isPresent())
+        //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // NewUser newUser = user.get();
     }
 }
